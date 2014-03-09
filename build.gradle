@@ -1,0 +1,44 @@
+description = 'Lambdoop-sandbox'
+
+group = 'com.lambdoop'
+
+  apply plugin: 'base'
+  apply plugin: 'maven'
+  apply plugin: 'eclipse'
+  apply plugin: 'idea'
+  apply plugin: 'java'
+  apply plugin: 'maven'
+  
+  sourceCompatibility=1.6
+  targetCompatibility=1.6
+
+  junitVersion = '4.8.2'
+  log4jVersion = '1.2.12'
+  mockitoVersion = '1.9.0'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+	test {
+		resources {
+			srcDirs = ['src/test/resources', 'src/test/java']
+		}
+	}
+}
+
+dependencies {
+    compile "org.apache.hadoop:hadoop-yarn-api:2.3.0"
+	testCompile "junit:junit-dep:$junitVersion"
+    testCompile "org.mockito:mockito-all:$mockitoVersion"
+}
+
+task wrapper(type: Wrapper) {
+    description = 'Generates gradlew[.bat] scripts'
+}
+
+task copyToLib(type: Copy) {
+    into "$buildDir/output/lib"
+    from configurations.runtime
+}
