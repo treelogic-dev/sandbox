@@ -1,7 +1,6 @@
 description = 'Lambdoop-sandbox'
 
 group = 'com.lambdoop'
-
   apply plugin: 'base'
   apply plugin: 'maven'
   apply plugin: 'eclipse'
